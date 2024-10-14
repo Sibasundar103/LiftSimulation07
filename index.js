@@ -58,6 +58,29 @@ function createFloors(floors, lifts) {
 
     UpButton.dataset.floor = floors;
     DownButton.dataset.floor = floors;
+     // Disable "Down" button on the first floor
+     if (floors === 1) {
+        DownButton.disabled = true; // Disable the button
+        DownButton.style.backgroundColor = "#e3ab0f"; // Optional: change style to indicate it's disabled
+        DownButton.style.cursor = "not-allowed"; // Optional: change cursor style
+        DownButton.style.display="none";
+    }
+
+    // Hide "Up" button on the top floor
+    if (floors === parseInt(floorInput.value, 10)) {
+        UpButton.style.display = "none";
+    } // Disable "Down" button on the first floor
+     if (floors === 1) {
+        DownButton.disabled = true; // Disable the button
+        DownButton.style.backgroundColor = "#e3ab0f"; // Optional: change style to indicate it's disabled
+        DownButton.style.cursor = "not-allowed"; // Optional: change cursor style
+        DownButton.style.display="none";
+    }
+
+    // Hide "Up" button on the top floor
+    if (floors === parseInt(floorInput.value, 10)) {
+        UpButton.style.display = "none";
+    }
 
     buttonContainer.append(UpButton);
     buttonContainer.append(DownButton);
