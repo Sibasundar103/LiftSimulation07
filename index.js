@@ -3,11 +3,20 @@ const LiftInput = document.getElementById("lift-input");
 const submitButton = document.getElementById("submit-btn");
 const container = document.getElementById("container");
 const liftContainer = document.createElement("div");
+// Add event listeners to restrict input to numbers only
+floorInput.addEventListener("input", validateNumericInput);
+LiftInput.addEventListener("input", validateNumericInput);
 
 let liftStates = {}; 
 let liftQueues = {}; 
 
+// submitButton.addEventListener("click", () => {
+// Validate inputs when the submit button is clicked
 submitButton.addEventListener("click", () => {
+    if (!validateInputs()) {
+        alert("Please enter valid numbers for floors and lifts.");
+        return; // Exit if inputs are not valid
+    } 
     container.innerHTML = "";
     liftContainer.innerHTML = "";
 
@@ -32,6 +41,25 @@ submitButton.addEventListener("click", () => {
     LiftInput.value = "";
     floorInput.value = "";
 });
+// Function to validate numeric input during typing
+function validateNumericInput(event) {
+    const value = event.target.value;
+
+    // Allow only numeric values by removing any non-numeric characters
+    event.target.value = value.replace(/[^0-9]/g, '');
+}
+// Function to validate inputs before submission
+function validateInputs() {
+    const numFloors = floorInput.value;
+    const numLifts = LiftInput.value;
+
+    // Ensure that both inputs are not empty and contain only numeric values
+    if (!numFloors || !numLifts || isNaN(numFloors) || isNaN(numLifts)) {
+        return false;
+    }
+
+    return true;
+}
 
 function createFloors(floors, lifts) {
     const floorDiv = document.createElement("div");
